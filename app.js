@@ -92,6 +92,17 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 // ROUTES
+// LOGOUT
+app.get("/logout", (req, res) => {
+ // LOGOUT USING PASSPORT JS
+ req.logOut((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    res.redirect("/");
+  }
+});
+})
 // VIEW POST AND COMMMENTS
 app.get("/viewPost/:post", (req, res) => {
   const requestedPostTitle = req.params.post;
