@@ -1,0 +1,34 @@
+<%- include('partials/header'); -%>
+<div class="jumbotron text-center">
+  <div class="">
+    <section class="jumbotron ">
+      <div class="container">
+        <h1>Welcome to SOLV</h1>
+        <p class="lead text-muted">Get help with homework, projects, research and so much more from a large audience</p>
+        <p>
+          <a href="/submitHomeWork" class="btn btn-primary my-2">Submit Homework</a>
+          <a href="/logout" class="btn btn-secondary my-2">Logout</a>
+        </p>
+      </div>
+    </section>
+  </div>
+  <div class="container">
+     <!-- Display All Homeworks from Database row of columns -->
+     <div class="row">
+      <% allHomework.forEach(homework => { %>
+        <div class="col-md-4">
+          <h3 class="text-left"><%= homework.user %></h3>
+          <h5 class="text-left"><%= homework.title %> </h5>
+          <p class="text-left"><%= homework.summary %></p>
+          <p><a class="btn btn-secondary float-left" href="http://localhost:3000/viewPost/<%= homework.title %> " role="button">View details &raquo;</a></p>
+        </div>
+        
+     <%  }); %> 
+     </div>
+    </div>
+  </div> <!-- /container -->
+      </div>
+    </div>
+    <%- include('partials/footer'); -%>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    
+    <title>SolV</title> 
+  </head>
+  <style>
+    body {
+    background-color: #E8ECEF;
+    padding: 0 100px 0 100px;
+}
+
+.centered {
+   padding-top: 200px;
+   text-align: center;
+}
+
+.secret-text {
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #000;
+}
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.navbar-nav li a:hover {
+    color: grey !important;
+}
+  </style>
+  <body>
+<div class="container mt-5">
+  <h1>MAKE POST</h1>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <!-- Makes POST request to /loginn route -->
+          <form action="/submitHomeWork" enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <textarea
+                type="text"
+                class="form-control"
+                id="email"
+                name="username"
+                aria-describedby="emailHelp"
+                placeholder="Enter Summary of Homework, Assignment, or Project"
+                rows="3"
+              ></textarea>  
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Add Image(Optional)</label>
+                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+              </div>
+           
+            <button type="submit" class="btn btn-dark">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="footer-padding"></div>
+<div class="centered">
+    <p></p>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
