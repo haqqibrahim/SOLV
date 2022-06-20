@@ -23,7 +23,7 @@ app.set("view engine", "ejs");
 
 // DATABASE CONNECTION
 mongoose.connect(
-  process.env.DBURL,
+  "mongodb+srv://haqq:haqq1234@cluster0.fggpn.mongodb.net/?retryWrites=true&w=majority",
   {
     useUnifiedTopology: true,
   },
@@ -52,8 +52,8 @@ const homeworkSchema = new mongoose.Schema({
     {
       user: String,
       comment: String,
-    }
-  ]
+    },
+  ],
 });
 
 const Homework = new mongoose.model("Homework", homeworkSchema);
@@ -61,7 +61,7 @@ const Homework = new mongoose.model("Homework", homeworkSchema);
 // SETTING UP SESSION
 app.use(
   session({
-    secret: process.env.SESSIONSECRET,
+    secret: "This is the secret",
     resave: false,
     saveUninitialized: false,
   })
@@ -101,42 +101,41 @@ app.get("/viewPost/:post", (req, res) => {
       console.log(err);
     } else {
       res.render("viewPost", {
-       title: post.title,
+        title: post.title,
         summary: post.summary,
         image: post.image,
         // COMMENT
         comments: post.comment,
-
       });
     }
   });
-})
+});
 
 app.post("/viewPost/:post", (req, res) => {
   // ADD COMMENT
- if(req.isAuthenticated()){
-  const requestedPostTitle = req.params.post;
-  const comment = req.body.comment;
-  const user = req.user.username;
-  Homework.findOne({ title: requestedPostTitle }, (err, post) => {
-    if (err) {
-      console.log(err);
-    } else {
-      post.comment.push({
-        user: user,
-        comment: comment,
-      });
-      post.save();
-      console.log(post);
-      res.redirect("/viewPost/" + requestedPostTitle);
-    }
-  });
-}
-})
+  if (req.isAuthenticated()) {
+    const requestedPostTitle = req.params.post;
+    const comment = req.body.comment;
+    const user = req.user.username;
+    Homework.findOne({ title: requestedPostTitle }, (err, post) => {
+      if (err) {
+        console.log(err);
+      } else {
+        post.comment.push({
+          user: user,
+          comment: comment,
+        });
+        post.save();
+        console.log(post);
+        res.redirect("/viewPost/" + requestedPostTitle);
+      }
+    });
+  }
+});
 
 // SUBMIT HOMEWORk
 app.get("/submitHomeWork", (req, res) => {
-// CHECK IF USER IS AUTHENTICATED
+  // CHECK IF USER IS AUTHENTICATED
   if (req.isAuthenticated()) {
     res.render("submitHomeWork");
   } else {
