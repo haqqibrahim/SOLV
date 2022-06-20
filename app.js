@@ -137,7 +137,7 @@ app.post("/viewPost/:post", (req, res) => {
 app.get("/submitHomeWork", (req, res) => {
   // CHECK IF USER IS AUTHENTICATED
   if (req.isAuthenticated()) {
-    res.render("submitHomeWork");
+    res.render("submitHomework");
   } else {
     res.redirect("/login");
   }
