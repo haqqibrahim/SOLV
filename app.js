@@ -94,14 +94,15 @@ var upload = multer({ storage: storage });
 // ROUTES
 // LOGOUT
 app.get("/logout", (req, res) => {
+
  // LOGOUT USING PASSPORT JS
- req.logOut((err) => {
-  if (err) {
+ req.logout((err) => {
+  if(err) {
     console.log(err);
   } else {
     res.redirect("/");
   }
-});
+ })
 })
 // VIEW POST AND COMMMENTS
 app.get("/viewPost/:post", (req, res) => {
