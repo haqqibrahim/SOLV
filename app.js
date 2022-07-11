@@ -17,6 +17,7 @@ const app = express();
 // MIDDLEWARE
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 // VIEWS
 app.set("view engine", "ejs");
@@ -92,22 +93,28 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 // ROUTES
+// CHAT
+app.get("/chat", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("chat");
+  } else {
+    res.redirect("/login");
+  }
+});
 // LOGOUT
 app.get("/logout", (req, res) => {
-
- // LOGOUT USING PASSPORT JS
- req.logout((err) => {
-  if(err) {
-    console.log(err);
-  } else {
-    res.redirect("/");
-  }
- })
-})
+  // LOGOUT USING PASSPORT JS
+  req.logout((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 // VIEW POST AND COMMMENTS
 app.get("/viewPost/:post", (req, res) => {
   const requestedPostTitle = req.params.post;
-  console.log(requestedPostTitle);
   Homework.findOne({ title: requestedPostTitle }, (err, post) => {
     if (err) {
       console.log(err);
@@ -138,7 +145,6 @@ app.post("/viewPost/:post", (req, res) => {
           comment: comment,
         });
         post.save();
-        console.log(post);
         res.redirect("/viewPost/" + requestedPostTitle);
       }
     });
@@ -158,7 +164,6 @@ app.get("/submitHomeWork", (req, res) => {
 app.post("/submitHomeWork", upload.single("image"), (req, res) => {
   // CHECK IF USER IS AUTHENTICATED
   if (req.isAuthenticated()) {
-    console.log(req.user.username);
     const img = fs.readFileSync(req.file.path);
     const encode_img = img.toString("base64");
     const finalImg = {
@@ -199,8 +204,7 @@ app.post("/login", (req, res) => {
     } else {
       passport.authenticate("local")(req, res, () => {
         res.redirect("/home");
-        console.log(user);
-        console.log(req.body.username);
+
         console.log("Logged in");
       });
     }
@@ -223,7 +227,6 @@ app.post("/register", (req, res) => {
         passport.authenticate("local")(req, res, () => {
           res.redirect("/home");
         });
-        console.log(user);
         console.log("User registered");
         console.log(req.body.username);
       }
